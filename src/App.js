@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
 function App() {
   const [inputValue, setInputValue] = useState("");
   const [todoItems, setTodoItems] = useState([]);
@@ -30,27 +33,34 @@ function App() {
       <header className="App-header">
         <div>
           <h1>To Do List</h1>
-          <form onSubmit={addItems}>
-            <input
-              id="Todo"
-              name="Todo"
-              placeholder="Text here"
-              value={inputValue || ""}
-              onChange={(e) => setInputValue(e.target.value)}
-            />
-            <button type="submit">Add Todo Item</button>
-          </form>
-
-          <ul>
-            {todoItems.map((item) => (
-              <li key={item.id}>
-                {item.value}
-                <button onClick={() => deleteItems(item.id)}>x</button>
-              </li>
-            ))}
-          </ul>
         </div>
       </header>
+      <div>
+        <form onSubmit={addItems}>
+          <input
+            id="Todo"
+            name="Todo"
+            placeholder="Text here"
+            value={inputValue || ""}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <button type="submit">Add Todo Item</button>
+        </form>
+
+        <ul>
+          {todoItems.map((item) => (
+            <li key={item.id}>
+              {item.value}
+              <button
+                onClick={() => deleteItems(item.id)}
+                className="delete-button"
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
